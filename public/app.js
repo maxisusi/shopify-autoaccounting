@@ -11,7 +11,5 @@ generate.addEventListener('click', async (event) => {
     const fullData = data.orders;
     console.log(fullData);
 
-    
-
 })
 
