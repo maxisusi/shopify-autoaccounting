@@ -30,20 +30,26 @@ header {
 
 .accounting-controller {
     display: flex;
-    width: 65%;
+    width: 50%;
     display: flex;
     margin: 3em;
 
 
 }
 
-.label-card, p  {
+.label-card  {
     display: flex;
     width: 100%;
-    padding:0;
     height: 50px;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
     justify-content: space-between;
-    border-bottom: 1px solid;
-
 }
+
+.label-card p {
+    margin-bottom: 0;
+
+    
+}
+
 
