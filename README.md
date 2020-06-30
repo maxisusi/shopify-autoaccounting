@@ -1,4 +1,4 @@
-# shopify-autoaccounting 🤑
+# Shopify auto-accounting 🤑
 Application that automatically stores shopify orders and build a fully fledged financial statement in Google Sheets
 
 I'm using Shopify API to get order infomations from the client and pushing the datas in a brand new Google Sheet.
