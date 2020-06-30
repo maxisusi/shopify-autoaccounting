@@ -1,18 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
-    <title>Document</title>
+    <title>Accounting</title>
 </head>
-<body>
-    <h1>Get my orders</h1>
-    <main>
-        <button id='generate' class="button-primary">Generate</button>
 
+<body>
+    <main>
+        <div class="form-submit">
+            <header>
+                <h1>Get my orders</h1>
+            </header>
+
+            <form class="form-input">
+                <div class="row">
+
+                    <div class="six columns">
+                        <label for="store-name">Your Store Name</label>
+                        <input class="u-full-width" type="text" placeholder="My amazing store" name="store-name">
+                    </div>
+
+                    <div class="six columns">
+                        <label for="store-name">Api Key</label>
+                        <input class="u-full-width" type="text" placeholder="API" name="api-key">
+                    </div>
+
+                </div>
+
+                <label for="store-name">Api Password</label>
+                <input class="u-full-width" type="text" placeholder="Password" name="api-key">
+                <input class="button-primary u-full-width" type="submit" value="Submit">
+            </form>
+        </div>
+
+        <div class="accounting-controller">
+            <div class="label-card">
+                <p class="s-name">Store name</p>
+                <p class="s-status">Status</p>
+                <button class="submit">Send Data</button>
+            </div>
+        </div>
     </main>
+
+
+
     <script src="app.js"></script>
 </body>
+
 </html>

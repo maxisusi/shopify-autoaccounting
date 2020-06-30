@@ -1,6 +1,49 @@
-main {
+*{
+    padding:0;
+    margin:0;
+}
+
+.form-input {
+    width: 70%;
+}
+
+.form-submit {
+    width: 30%;
+    min-width: 250px;
+    background-color: #1e3799;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    max-width: 500px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    
 }
+
+main {
+    display: flex;
+}
+
+header {
+    margin-bottom: 3em;
+}
+
+.accounting-controller {
+    display: flex;
+    width: 65%;
+    display: flex;
+    margin: 3em;
+
+
+}
+
+.label-card, p  {
+    display: flex;
+    width: 100%;
+    padding:0;
+    height: 50px;
+    justify-content: space-between;
+    border-bottom: 1px solid;
+
+}
+
