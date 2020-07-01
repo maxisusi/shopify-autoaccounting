@@ -1,5 +1,6 @@
 
 const storeForm = document.querySelector('.form-input');
+getStoreData();
 
 storeForm.addEventListener('submit', (event) => {
     
@@ -18,12 +19,13 @@ storeForm.addEventListener('submit', (event) => {
         gSheet,
     }
 
-    sendData(storeData);
+    sendStoreData(storeData);
+    storeForm.reset();
 
     console.log(storeData);
 })
 
-async function sendData(data) {
+async function sendStoreData(data) {
 
     const options = {
         method: 'POST',
@@ -34,8 +36,14 @@ async function sendData(data) {
     }
     const response = await fetch('/api/send/store-data', options);
     const answer = await response.json();
-    console.log(answer);
-    
+    console.log(answer); 
+    getStoreData();
+}
+
+async function getStoreData() {
+    const response = await fetch('/api/get/store-data');
+    const data = await response.json();
+    console.log(data);
 }
 
 

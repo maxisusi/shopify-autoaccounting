@@ -34,8 +34,21 @@ app.post('/api/send/store-data', (req, res) => {
         console.log(storeData);
     }
     else {
+        res.status(422);
         console.error('Content is not valid');
     }
+})
+
+app.get('/api/get/store-data', (req, res) => {
+    console.log('I have a request');
+    database.find({}, (err, data) => {
+        if(err) {
+            res.end(err);
+            return;
+        }
+
+        res.json(data);
+    })
 })
 
 function isDataValid(data) {
@@ -44,6 +57,8 @@ function isDataValid(data) {
         data.api_pass && data.api_pass.toString().trim() !== '' &&
         data.gSheet && data.gSheet.toString().trim() !== '';
 }
+
+
 
 
 // app.get('/app/orders', (req, res) => {

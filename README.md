@@ -6,8 +6,8 @@ For prototyping, i'm using vanilla JS & NodeJS. If everythings works fine i will
 
 # To do list 📒
 
-- [ ] Create Stores when activated
-- [ ] Store info in a DB
+- [x] Create Stores when activated
+- [x] Store info in a DB
 - [ ] Generate all stores on load
 - [ ] Create specific api call for different websites
 - [ ] NJS - Send datas on Google sheet 
