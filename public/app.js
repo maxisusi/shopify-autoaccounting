@@ -1,10 +1,9 @@
-
 const storeForm = document.querySelector('.form-input');
+const accountingSide = document.querySelector('.accounting-controller');
 getStoreData();
 
 storeForm.addEventListener('submit', (event) => {
     
-    event.preventDefault();
     const formElements = new FormData(storeForm);
 
     const storeName = formElements.get('store-name');
@@ -43,8 +42,32 @@ async function sendStoreData(data) {
 async function getStoreData() {
     const response = await fetch('/api/get/store-data');
     const data = await response.json();
+    displayStoreData(data);
     console.log(data);
 }
+
+function displayStoreData(data) {
+
+    data.forEach(elem => {
+        const labelCard = document.createElement('div');
+        labelCard.classList.add('label-card');
+
+        const sName = document.createElement('p');
+        sName.textContent = elem.storeName;
+
+        const sStatus = document.createElement('p');
+        sStatus.innerHTML += `<a href="${elem.gSheet}">Google Sheet</a>`;
+
+        const sendDataButton = document.createElement('button');
+        sendDataButton.textContent = 'Send Data';
+        sendDataButton.classList.add('primary-button');
+
+        labelCard.append(sName, sStatus, sendDataButton);
+        accountingSide.appendChild(labelCard);
+    })
+}
+
+
 
 
 
