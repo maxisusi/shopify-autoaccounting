@@ -17,7 +17,6 @@ const database = new Datastore('database.db');
 database.loadDatabase();
 
 app.post('/api/send/store-data', (req, res) => {
-    console.log('I have a request');
 
     const data = req.body;
 
@@ -31,8 +30,8 @@ app.post('/api/send/store-data', (req, res) => {
             gSheet: data.gSheet.toString(),
             api_endpoint: `https://${data.api_key.toString()}:${data.api_pass.toString()}@${data.shopifySite.toString()}` 
         }
-        database.insert(storeData);
 
+        database.insert(storeData);
         console.log(storeData);
     }
     else {
@@ -42,7 +41,7 @@ app.post('/api/send/store-data', (req, res) => {
 })
 
 app.get('/api/get/store-data', (req, res) => {
-    console.log('I have a request');
+
     database.find({}, (err, data) => {
         if(err) {
             res.end(err);
@@ -50,6 +49,7 @@ app.get('/api/get/store-data', (req, res) => {
         }
 
         res.json(data);
+
     })
 })
 
@@ -63,31 +63,82 @@ function isDataValid(data) {
 
 
 
+app.post('/api/post/send-google', (req, res) => {
 
-// app.get('/app/orders', (req, res) => {
 
-//     console.log('I have a request');
+    database.find({storeName: `${req.body.title}`}, (err, data) => {
+        if(err) {
+            res.end(err);
+            return;
+        }
 
-//     const options = {
-//         method: 'GET',
-//         uri: API_ENDPOINT,
-//         json: true,
-//         headers: { 
-//             'Content-Type': 'application/json',
-//         }
-//     };
+        const API_ENDPOINT = `/admin/api/2020-07/orders.json?fields=created_at,line_items,name,total_price,financial_status,product_id`;
+        let API_KEY = data[0].api_endpoint + API_ENDPOINT;
 
-//     request(options)
-//         .then(function(response) {
-//             console.log(response);
-//             res.status(200);
-//             res.json(response);
+        const options = {
+            method: 'GET',
+            uri : API_KEY,
+            json: true,
+            headers: { 
+                'Content-Type': 'application/json',
+            },
+        };
 
-//         })
-//         .catch(function (err) {
-//             console.log(err);
-//             res.status(500)
-//         })
+        request(options)
+        .then(function(response) {
+            console.log(response);
+            res.status(200);
+            res.json(response);
+            console.log(response);
 
-// })
+        })
+        .catch(function (err) {
+            //console.log(err);
+            res.status(500)
+        })
+
+
+    })
+
+
+  
+})
+
+
+
+
+
+app.get('/app/orders', (req, res) => {
+
+    database.find({storeName: `${req.body}`}, (err, data) => {
+        if(err) {
+            res.end(err);
+            return;
+        }
+
+        console.log(req.body);
+
+    })
+
+    const options = {
+        method: 'GET',
+        uri: API_ENDPOINT,
+        json: true,
+        headers: { 
+            'Content-Type': 'application/json',
+        }
+    };
+
+    request(options)
+        .then(function(response) {
+            console.log(response);
+            res.status(200);
+            res.json(response);
+
+        })
+        .catch(function (err) {
+            console.log(err);
+            res.status(500)
+        })
+})
 

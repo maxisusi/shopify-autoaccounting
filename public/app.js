@@ -1,9 +1,12 @@
 const storeForm = document.querySelector('.form-input');
 const accountingSide = document.querySelector('.accounting-controller');
+const groupCard = document.querySelector('.group-card');
+
+groupCard.addEventListener('click', sendToGoogleSheets);
 getStoreData();
 
 storeForm.addEventListener('submit', (event) => {
-    
+
     const formElements = new FormData(storeForm);
 
     const storeName = formElements.get('store-name');
@@ -35,7 +38,7 @@ async function sendStoreData(data) {
     }
     const response = await fetch('/api/send/store-data', options);
     const answer = await response.json();
-    console.log(answer); 
+    console.log(answer);
     getStoreData();
 }
 
@@ -49,6 +52,11 @@ async function getStoreData() {
 function displayStoreData(data) {
 
     data.forEach(elem => {
+
+
+        const cardWrapper = document.createElement('li');
+        cardWrapper.classList.add('card-wrapper');
+
         const labelCard = document.createElement('div');
         labelCard.classList.add('label-card');
 
@@ -63,11 +71,37 @@ function displayStoreData(data) {
         sendDataButton.classList.add('primary-button');
 
         labelCard.append(sName, sStatus, sendDataButton);
-        accountingSide.appendChild(labelCard);
+        cardWrapper.appendChild(labelCard);
+        groupCard.appendChild(cardWrapper);
+        accountingSide.appendChild(groupCard);
     })
 }
 
+async function sendToGoogleSheets(event) {
+    event.preventDefault();
 
+    const trigger = event.target.innerText;
+    const title = { title : event.target.parentElement.childNodes[0].innerText};
+    if (trigger === 'SEND DATA') {
+
+        event.preventDefault();
+
+
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(title),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }
+
+        const response = await fetch('/api/post/send-google', options);
+        const answer = await response.json();
+        console.log(answer);
+        console.log(title)
+
+    }
+}
 
 
 

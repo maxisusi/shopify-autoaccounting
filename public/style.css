@@ -30,9 +30,8 @@ header {
 .accounting-controller {
     width: 65%;
     display: flex;
-
     flex-direction: column;
-    align-items: center;
+
     justify-content: center;
 
 
@@ -51,4 +50,12 @@ header {
 .label-card p {
     margin-bottom: 0;
     width: 100%;
+}
+
+.group-card {
+    width: 100%;
+    margin-left: 5em;
+    list-style: none;
+    flex-direction: column;
+
 }
