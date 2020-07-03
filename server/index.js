@@ -28,7 +28,7 @@ app.post('/api/send/store-data', (req, res) => {
             api_key: data.api_key.toString(),
             api_pass: data.api_pass.toString(),
             gSheet: data.gSheet.toString(),
-            api_endpoint: `https://${data.api_key.toString()}:${data.api_pass.toString()}@${data.shopifySite.toString()}` 
+            api_endpoint: `https://${data.api_key.toString()}:${data.api_pass.toString()}@${data.shopifySite.toString()}`
         }
 
         database.insert(storeData);
@@ -43,11 +43,11 @@ app.post('/api/send/store-data', (req, res) => {
 app.get('/api/get/store-data', (req, res) => {
 
     database.find({}, (err, data) => {
-        if(err) {
+        if (err) {
             res.end(err);
             return;
         }
-        
+
         res.json(data);
 
     })
@@ -65,8 +65,8 @@ function isDataValid(data) {
 app.post('/api/post/send-google', (req, res) => {
 
 
-    database.find({storeName: `${req.body.title}`}, (err, data) => {
-        if(err) {
+    database.find({ storeName: `${req.body.title}` }, (err, data) => {
+        if (err) {
             res.end(err);
             return;
         }
@@ -76,60 +76,26 @@ app.post('/api/post/send-google', (req, res) => {
 
         const options = {
             method: 'GET',
-            uri : API_KEY,
+            uri: API_KEY,
             json: true,
-            headers: { 
+            headers: {
                 'Content-Type': 'application/json',
             },
         };
 
         request(options)
-        .then(function(response) {
-            res.status(200);
-            res.json(response);
+            .then(function (response) {
+                res.status(200);
+                res.json(response);
 
-
-        })
-        .catch(function (err) {
-            console.log(err);
-            res.status(500)
-        })
-
+            })
+            .catch(function (err) {
+                console.log(err);
+                res.status(500)
+            })
     })
 })
 
 
-app.get('/app/orders', (req, res) => {
 
-    database.find({storeName: `${req.body}`}, (err, data) => {
-        if(err) {
-            res.end(err);
-            return;
-        }
-
-        console.log(req.body);
-
-    })
-
-    const options = {
-        method: 'GET',
-        uri: API_ENDPOINT,
-        json: true,
-        headers: { 
-            'Content-Type': 'application/json',
-        }
-    };
-
-    request(options)
-        .then(function(response) {
-            console.log(response);
-            res.status(200);
-            res.json(response);
-
-        })
-        .catch(function (err) {
-            console.log(err);
-            res.status(500)
-        })
-})
 
