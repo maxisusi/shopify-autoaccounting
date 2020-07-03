@@ -10,18 +10,18 @@ storeForm.addEventListener('submit', (event) => {
     const api_key = formElements.get('api-key');
     const api_pass = formElements.get('api-pass');
     const gSheet = formElements.get('google-link');
+    const shopifySite = formElements.get('shopify-link');
 
     const storeData = {
         storeName,
         api_key,
         api_pass,
         gSheet,
+        shopifySite,
     }
 
     sendStoreData(storeData);
     storeForm.reset();
-
-    console.log(storeData);
 })
 
 async function sendStoreData(data) {

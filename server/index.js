@@ -23,11 +23,13 @@ app.post('/api/send/store-data', (req, res) => {
 
     if (isDataValid(data)) {
         console.log('Content is valid');
+
         const storeData = {
             storeName: data.storeName.toString(),
             api_key: data.api_key.toString(),
             api_pass: data.api_pass.toString(),
             gSheet: data.gSheet.toString(),
+            api_endpoint: `https://${data.api_key.toString()}:${data.api_pass.toString()}@${data.shopifySite.toString()}` 
         }
         database.insert(storeData);
 
@@ -55,7 +57,8 @@ function isDataValid(data) {
     return data.storeName && data.storeName.toString().trim() !== '' &&
         data.api_key && data.api_key.toString().trim() !== '' &&
         data.api_pass && data.api_pass.toString().trim() !== '' &&
-        data.gSheet && data.gSheet.toString().trim() !== '';
+        data.gSheet && data.gSheet.toString().trim() !== '' &&
+        data.shopifySite && data.shopifySite.toString().trim() !== '';
 }
 
 

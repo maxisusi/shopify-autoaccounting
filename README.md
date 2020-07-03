@@ -9,7 +9,7 @@ For prototyping, i'm using vanilla JS & NodeJS. If everythings works fine i will
 - [x] Create Stores when activated
 - [x] Store info in a DB
 - [x] Generate all stores on load
-- [ ] Create specific api call for different websites
+- [x] Create specific api call for different websites
 - [ ] NJS - Send datas on Google sheet 
 - [ ] Store datas and order them by date
 - [ ] Generate a brand new Google Sheets file
