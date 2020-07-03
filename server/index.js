@@ -47,7 +47,7 @@ app.get('/api/get/store-data', (req, res) => {
             res.end(err);
             return;
         }
-
+        
         res.json(data);
 
     })
@@ -60,7 +60,6 @@ function isDataValid(data) {
         data.gSheet && data.gSheet.toString().trim() !== '' &&
         data.shopifySite && data.shopifySite.toString().trim() !== '';
 }
-
 
 
 app.post('/api/post/send-google', (req, res) => {
@@ -86,26 +85,18 @@ app.post('/api/post/send-google', (req, res) => {
 
         request(options)
         .then(function(response) {
-            console.log(response);
             res.status(200);
             res.json(response);
-            console.log(response);
+
 
         })
         .catch(function (err) {
-            //console.log(err);
+            console.log(err);
             res.status(500)
         })
 
-
     })
-
-
-  
 })
-
-
-
 
 
 app.get('/app/orders', (req, res) => {
